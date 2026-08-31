@@ -17,13 +17,25 @@ def profit_percentage(sell, profit):
 
 promo = 0.00
 postage = 0.00
+buy = 0.00
+sell = 0.00
 
-buy = float(input("How much did you pay? £"))
-sell = float(input("How much is it selling for? £"))
+item = str(input("What item are you selling? "))
+while buy == 0.00:
+    try: 
+        buy = float(input(f"How much did {item} cost you? £"))
+    except ValueError:
+        print('Please only enter a number value')
+        
+while sell == 0.00:
+    try:
+        sell = float(input("How much is it selling for? £"))
+    except ValueError:
+        print('Please only enter a number value')
+
 platform = input(f"Choose which platform you are selling on {platforms}: ")
 if platform not in platforms:
     print('enter one of the patforms stated')
-item = str(input("What item are you selling? "))
 
 if platform == 'ebay':
     promo = 0.03
@@ -34,4 +46,4 @@ if platform in platforms:
 profit = profit_calculator(buy, sell, promotion_fees(sell, promo), postage)
 margins = profit_percentage(sell, profit)
 
-print(f'Total profit = £{profit} \n Profit percentage = {margins:.2f}%')
+print(f'Total profit = £{profit:.2f} \n Profit percentage = {margins:.2f}%')
