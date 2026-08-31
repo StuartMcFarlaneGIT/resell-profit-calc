@@ -1,23 +1,22 @@
 platforms = ['ebay', 'vinted', 'facebook']
-fee_percentages = {
-    'ebay' : 0.04,
-    'vinted' : 0.00,
-    'facebook' : 0.00,
-}
-
+promo = 0
 
 buy = float(input("How much did you pay? £"))
 sell = float(input("How much is it selling for? £"))
 platform = input(f"Choose which platform you are selling on {platforms}: ")
-if platform in fee_percentages:
-    fees = fee_percentages[platform]
-else:
+if not platform in platforms:
     print('enter one of the patforms stated')
 item = str(input("What item are you selling? "))
 
-def calculator(buy, sell, fees):
-    fee = sell * fees
-    return(sell - buy - fee)
-profit = calculator(buy, sell, fees)
+if platform == 'ebay':
+    promo = 0.03
+
+def promotion_fees(sell, promo):
+    promo_fee = float(sell*promo)
+    return promo_fee
+
+def calculator(buy, sell, promo_fee):
+    return(sell - buy - promo_fee)
+profit = calculator(buy, sell, promotion_fees(sell, promo))
 
 print(profit)
