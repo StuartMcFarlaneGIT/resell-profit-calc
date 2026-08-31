@@ -1,9 +1,22 @@
-platforms = ['ebay', 'vinted', 'facebook']
+platforms = [
+    'ebay', 
+    'vinted', 
+    'facebook'
+    ]
 postage_fees = {
     'ebay': 2.94,
     'vinted': 0.00,
-    'facebook': 0.00
-}
+    'facebook': 0.00,
+    }
+categories = [
+    'shoes', 
+    'watches', 
+    'DVDs', 
+    'video games', 
+    'clothing', 
+    'phones',
+    'facebook finds'
+    ]
 
 def promotion_fees(sell, promo):
     promo_fee = float(sell*promo)
@@ -21,12 +34,17 @@ buy = 0.00
 sell = 0.00
 
 item = str(input("What item are you selling? "))
+
+category = input(f"Choose which platform you are selling on {categories}: ")
+if category not in categories:
+    print('enter one of the categories stated')
+
 while buy == 0.00:
     try: 
         buy = float(input(f"How much did {item} cost you? £"))
     except ValueError:
         print('Please only enter a number value')
-        
+
 while sell == 0.00:
     try:
         sell = float(input("How much is it selling for? £"))
