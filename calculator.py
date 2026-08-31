@@ -5,13 +5,23 @@ postage_fees = {
     'facebook': 0.00
 }
 
+def promotion_fees(sell, promo):
+    promo_fee = float(sell*promo)
+    return promo_fee
+
+def profit_calculator(buy, sell, promo_fee, postage):
+    return(sell - buy - promo_fee - postage)
+
+def profit_percentage(sell, profit):
+    return((profit/sell)*100)
+
 promo = 0.00
 postage = 0.00
 
 buy = float(input("How much did you pay? £"))
 sell = float(input("How much is it selling for? £"))
 platform = input(f"Choose which platform you are selling on {platforms}: ")
-if not platform in platforms:
+if platform not in platforms:
     print('enter one of the patforms stated')
 item = str(input("What item are you selling? "))
 
@@ -21,17 +31,7 @@ if platform == 'ebay':
 if platform in platforms:
     postage = postage_fees[platform]
 
-def promotion_fees(sell, promo):
-    promo_fee = float(sell*promo)
-    return promo_fee
-
-def profit_calculator(buy, sell, promo_fee, postage):
-    return(sell - buy - promo_fee - postage)
-
 profit = profit_calculator(buy, sell, promotion_fees(sell, promo), postage)
-
-def profit_percentage(sell, profit):
-    return((profit/sell)*100)
 margins = profit_percentage(sell, profit)
 
 print(f'Total profit = £{profit} \n Profit percentage = {margins:.2f}%')
