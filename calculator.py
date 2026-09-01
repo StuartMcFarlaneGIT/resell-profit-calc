@@ -3,6 +3,12 @@ This project was made to allo me to document my whole reselling business.
 The program takes in the item, category, what it was bought for, sold for and will display the profit and margins made on the item.
 This project will save inputs to a CSV file, allowing future SQL to be performed to gather in depth details on the profits of each category.
 """
+import csv
+import os
+from datetime import date
+
+CSV_FILE = 'sales.csv'
+HEADERS = ["date", "item", "category", "platform", "buy", "sell", "postage", "promo_fee", "profit", "margin"]
 
 #all platforms within reselling business
 platforms = [
@@ -41,6 +47,14 @@ def profit_percentage(buy, profit):
     if buy == 0:
         return 0.00
     return((profit/buy)*100)
+
+def save_to_csv(row):
+    file_exists = os.path.exists(CSV_FILE)
+    with open(CSV_FILE, "a", newline="") as f:
+        writer = csv.writer(f)
+        if not file_exists:
+            writer.writerow(HEADERS)
+        writer.writerow(row)
 
 #loops the project so the user doesnt need to keep restarting the program.
 while True:
@@ -94,10 +108,17 @@ while True:
     if platform in platforms:
         postage = postage_fees[platform]
 
+    promo_fee = promotion_fees(sell,promo)
     #profit is the result of the profit calculator function
-    profit = profit_calculator(buy, sell, promotion_fees(sell, promo), postage)
+    profit = profit_calculator(buy, sell, promo_fee, postage)
     #margins is the result of the profit percentage function
     margins = profit_percentage(buy, profit)
+
+    save_to_csv([
+    date.today(), item, category, platform,
+    f"{buy:.2f}", f"{sell:.2f}", f"{postage:.2f}",
+    f"{promo_fee:.2f}", f"{profit:.2f}", f"{margins:.2f}"
+    ])
 
     #will print the profit and the margins of each item
     print(f'Total profit = £{profit:.2f} \n Profit percentage = {margins:.2f}%')
