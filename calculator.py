@@ -89,8 +89,8 @@ def main():
         #inital input for the user to assign the item to their input.
         item = str(input("What item are you selling? "))
 
-        category = ask_from_list('Choose the category are selling', categories)
-        platform = ask_from_list('Choose the platform are selling on', platforms)
+        category = ask_from_list('Choose the category you are selling in ', categories)
+        platform = ask_from_list('Choose the platform you are selling on', platforms)
 
         buy = ask_for_price(f'How much did you pay for {item}? £')
         sell = ask_for_price('How much did you sell it for? £')
@@ -116,7 +116,7 @@ def main():
         ])
 
         #will print the profit and the margins of each item
-        print(f'Total profit = £{profit:.2f} \n Profit percentage = {margins:.2f}%')
+        print(f'Total profit = £{profit:.2f} \nProfit percentage = {margins:.2f}%')
         #asks the user if they have another item to add, if yes restarts the loop, if no then it breaks and ends the loop.
         again = input("Do you have another item? (y/n): ").lower()
         if again != 'y':
