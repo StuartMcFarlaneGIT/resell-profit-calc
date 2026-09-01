@@ -39,16 +39,16 @@ promo_fees = {
 }
 
 #function uses the sell and promotion fees of each platform to allow the total promotion fee for the sold item.
-def promotion_fees(sell, promo):
+def promotion_fees(sell: float, promo):
     promo_fee = float(sell*promo)
     return promo_fee
 
 #function calculates the profit of the item, taking the sell price and subtracting the buy, promo_fee and postage.
-def profit_calculator(buy, sell, promo_fee, postage):
-    return(sell - buy - promo_fee - postage)
+def profit_calculator(buy: float, sell: float, promo_fee: float, postage: float):
+    return(sell- buy - promo_fee - postage)
 
 #function calculates the profit margins for the item, dividing the profit by the buy price *100.
-def profit_percentage(buy, profit):
+def profit_percentage(buy: float, profit: float):
     if buy == 0:
         return 0.00
     return((profit/buy)*100)
@@ -89,7 +89,7 @@ def main():
         #inital input for the user to assign the item to their input.
         item = str(input("What item are you selling? "))
 
-        category = ask_from_list('Choose the category are selling', category)
+        category = ask_from_list('Choose the category are selling', categories)
         platform = ask_from_list('Choose the platform are selling on', platforms)
 
         buy = ask_for_price(f'How much did you pay for {item}? £')
