@@ -26,6 +26,8 @@ def profit_calculator(buy, sell, promo_fee, postage):
     return(sell - buy - promo_fee - postage)
 
 def profit_percentage(buy, profit):
+    if buy == 0:
+        return 0.00
     return((profit/buy)*100)
 
 while True:
@@ -43,15 +45,17 @@ while True:
         if category not in categories:
             print('enter one of the categories stated')
             
-    while buy == 0.00:
+    while True:
         try: 
             buy = float(input(f"How much did {item} cost you? £"))
+            break
         except ValueError:
             print('Please only enter a number value')
 
-    while sell == 0.00:
+    while True:
         try:
             sell = float(input("How much is it selling for? £"))
+            break
         except ValueError:
             print('Please only enter a number value')
 
