@@ -7,7 +7,7 @@ import csv
 import os
 from datetime import date
 
-CSV_FILE = 'sales.csv'
+CSV_FILE = 'example_sales.csv'
 HEADERS = ["date", "item", "category", "platform", "buy", "sell", "postage", "promo_fee", "profit", "margin"]
 
 #all platforms within reselling business
