@@ -68,6 +68,7 @@ def ask_from_list(prompt, options):
         if answer in options:
             return answer
         print(f"Please choose one of: {options}")
+        
 #Loops the input, so the user has to enter a numeric value and not a string
 def ask_for_price(prompt):
     while True:
